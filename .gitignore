@@ -1,0 +1,15 @@
+# Ignore data folders
+Data/
+data/
+
+# Ignore CSV and Excel files
+*.csv
+*.xlsx
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore OS files
+Thumbs.db
+.DS_Store
