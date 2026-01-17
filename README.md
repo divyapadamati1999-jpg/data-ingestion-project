@@ -1,41 +1,47 @@
- # Data Ingestion Project – Olist E-commerce Dataset
+ # Data Ingestion Pipeline – Olist E-commerce Dataset
 
-## Project Overview
-This project focuses on sourcing, cleaning, validating, and joining data from a real-world e-commerce dataset (Olist).
-The goal is to prepare high-quality, analysis-ready data following best practices in data ingestion.
+## Overview
+This project demonstrates a step-by-step data ingestion pipeline using
+real-world e-commerce data. The pipeline focuses on loading raw data,
+validating data quality, joining related tables, and producing a clean,
+enriched dataset ready for downstream ingestion.
+
+All transformations are implemented and traced using Jupyter Notebook.
 
 ## Dataset
-This project uses the following relational CSV files:
-- olist_orders_dataset.csv
-- olist_customers_dataset.csv
-- olist_order_items_dataset.csv
-- olist_products_dataset.csv
+Source: Olist Brazilian E-commerce Public Dataset
 
-## Folder Structure
+Tables used:
+- Orders
+- Customers
+- Order Items
+- Products
 
+## Pipeline Steps
+1. Load raw CSV datasets
+2. Validate row counts, duplicates, and missing values
+3. Convert timestamp and numeric columns
+4. Join related tables using appropriate join strategies
+5. Trace and explain missing values after each join
 
-## Cleaning Steps Completed
-- Converted timestamp columns to datetime (orders + order_items)
-- Validated primary keys and checked duplicates (order_id, customer_id, product_id)
-- Preserved event-based missing timestamps (e.g., cancelled/unavailable orders)
-- Converted numeric fields (price, freight_value, dimensions) to numeric types
-- Documented missing product metadata (category/description fields)
+## Step 4: Join Related Tables
+The datasets were joined incrementally based on their relationships and
+level of detail (grain):
 
-## Joining Logic Completed
-- customers → orders (join on customer_id, many-to-one)
-- orders → order_items (join on order_id, one-to-many)
-- order_items → products (join on product_id, many-to-one)
-- Used left joins to preserve transactional integrity
+- Orders → Customers (one-to-one, left join)
+- Orders → Order Items (one-to-many, left join)
+- Order Items → Products (many-to-one, left join)
 
-## Output Files
-Saved to: `data/processed/`
-- customers_clean.csv
-- orders_clean.csv
-- order_items_clean.csv
-- products_clean.csv
-- olist_joined.csv (final joined dataset)
+Row counts and missing values were checked after each join to ensure no
+orders were lost and that missing values aligned with real business scenarios
+such as cancelled or unavailable orders.
 
-## Next Steps
-- Add data validation rules (null thresholds, allowed order_status values, referential checks)
-- Add logging and error handling
-- Explore automation and AWS ingestion (S3/Athena)
+## Tools Used
+- Python
+- Pandas
+- Jupyter Notebook
+- Git & GitHub
+
+## Notes
+Raw and processed data files are excluded from GitHub using `.gitignore`.
+
