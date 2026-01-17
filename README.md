@@ -1,4 +1,4 @@
-# Data Ingestion Project – Olist E-commerce Dataset
+ # Data Ingestion Project – Olist E-commerce Dataset
 
 ## Project Overview
 This project focuses on sourcing, cleaning, validating, and joining data from a real-world e-commerce dataset (Olist).
